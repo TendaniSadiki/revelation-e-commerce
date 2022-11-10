@@ -4,6 +4,8 @@ import fire, { auth, db } from "../Config/Config";
 import { useNavigate } from "react-router-dom";
 import _, { size } from "underscore";
 import { uid } from "uid";
+import "./ProductView.css"
+
 function ProductVIew(individualProduct, ID, individualCartProduct) {
     const uidd = uid();
   const location = useLocation();
@@ -57,8 +59,11 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   }, []);
 
   return (
-    <div>
-      <img src={products.image} height={100} alt="productImage" />
+    <div className="prod">
+      <div className="image"> 
+         <img src={products.image} height={100} alt="productImage" />
+      </div>
+    <div className="info">
       <h1>{products.prodName}</h1>
       <p>{products.prodDescription}</p>
       <div>
@@ -114,6 +119,8 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
             </div>
           );
         })}
+      </div>
+
       </div>
       <p>{products.productPrice}</p>
       {/* <div className='btn btn-danger btn-md cart-btn' onClick={() => addCart (individualCartProduct.individualCartProduct)}>Add To Cart </div> */}
