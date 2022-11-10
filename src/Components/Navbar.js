@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import {FaShoppingCart, FaRegHeart} from 'react-icons/fa'
+import {BiLogOut} from 'react-icons/bi'
 import fire from '../Config/Config'
 import './Navbar.css'
 
@@ -39,7 +40,7 @@ export const Navbar = ({user}) => {
     {/* <span className='cart-indicator'>{totalQty}</span> */}
 
 </div>
-<div className='btn btn-danger btn-md navlink' onClick={handleLogout}>LOGOUT
+<div className='btn btn-danger btn-md' onClick={handleLogout}>LOGOUT
 
 </div>
 </>

@@ -1,0 +1,18 @@
+.navbar{
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leftside{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.leftside h4 {
+    margin-left: 50px;
+}

@@ -1,0 +1,15 @@
+
+
+.main-login{
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow-x:hidden ;
+    background: linear-gradient(to right, rgba(255,255,255) 50% );
+    
+}
+
+.login-contain{
+        height: 75vh;
+        width: 80%;
+        background: linear-gradient(to right bottom, rgba(236,255,255) 50%);
+}

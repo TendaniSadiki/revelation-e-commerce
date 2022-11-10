@@ -21,7 +21,7 @@ import Terms from './Components/Terms';
 
 function App() {
   return (
-    <div className="App">
+    <div >
       <BrowserRouter>
      
       <Routes>
