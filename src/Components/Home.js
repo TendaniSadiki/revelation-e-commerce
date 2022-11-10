@@ -5,6 +5,7 @@ import { Products } from './Products'
 import { onAuthStateChanged, } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { CartProduct } from './CartProduct'
+import Hero from './Hero'
 
 export const Home = (props) => {
     function GetUserUid() {
@@ -93,6 +94,7 @@ export const Home = (props) => {
     return (
         <>
             <Navbar user={user} />
+            <Hero />
             {products.length > 0 && (
                 <div className='container-fluid'>
                     <h1 className='text-center'>Product</h1>

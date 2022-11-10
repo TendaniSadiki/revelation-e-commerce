@@ -19,10 +19,10 @@ export const Navbar = ({user}) => {
          {/* <img src={logo} ></img> */}
          <h1>Revelation</h1>
          <h4><Link to='/' className='navlink'>Home</Link></h4>
-         <h4><Link to='/summer' className='navlink'>Summer</Link></h4>
-         <h4><Link to='/winter' className='navlink'>Winter</Link></h4>
-         <h4><Link to='/accessories' className='navlink'>Accessories</Link></h4>
-         <h4><Link to='/sale' className='navlink'>Sale</Link></h4>
+         <h4><Link to='/about' className='navlink'>About</Link></h4>
+         <h4><Link to='/terms' className='navlink'>Terms</Link></h4>
+         <h4><Link to='/faqs' className='navlink'>FAQs</Link></h4>
+         <h4><Link to='/disclaimer' className='navlink'>Disclaimer</Link></h4>
     </div>
     <div className='rightside'>
         {!user&&<>
