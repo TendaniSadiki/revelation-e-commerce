@@ -1,7 +1,7 @@
 .prod{
     width: 100%;
-    height: 50%;
-    background-color: aqua;
+    height: 100%;
+    background-color: transparent;
     position: absolute;
     float: left;
     left: 0px;
@@ -9,23 +9,77 @@
     margin: auto;
 }
 .image{
-    width: 30%;
-    height: 90%;
-    background-color: red;
+    width: 50%;
+    height: 100%;
+    background-image: linear-gradient(#ff6f69,#ffcc5c);
     margin: auto;
 }
 .image img{
-    width: 90%;
-    height: 90%;
+    width: 80%;
+    height: 80%;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 100px;
     display: flex;
     border-radius: 15px;
     
 }
 .info{
-    width: 70%;
+    width: 50%;
     height: 90%;
-    background-color: blue;
+    background-color: transparent;
     margin: auto;
+}
+.info .infos{
+   text-align: left;
+   margin-left: 50px;
+}
+.infos h1{
+    font-size: 50px;
+ }
+ .infos p{
+    font-size: 25px;
+ }
+.color{
+    display: flex;
+    width: 100%;
+    height: 22%;
+    background-color: transparent;
+    border-radius: 30px;
+    margin: auto;
+}
+.colorblock{
+    display: flex;
+    margin:auto;
+    border: 5px solid whitesmoke;
+    border-radius: 30px;
+
+}
+.colorblock:hover{
+
+   
+    border: 5px solid aqua
+}
+.size{
+    display: flex;
+    width: 100%;
+    height: 30%;
+    background-color: orange;
+    display: inline-block;
+    margin-top: 20px;
+    border-radius: 30px;
+}
+.sizeblock{
+    display: inline-block;
+    margin: 20px;
+    background-color: #ff6f69;
+}
+
+.sizeblock p{
+    font-size: 30px;
+    display: flex;
+  
+   
+    border: 5px solid whitesmoke;
+    border-radius: 30px;
+    margin-top: 50px;
 }

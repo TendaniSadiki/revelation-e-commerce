@@ -15,7 +15,7 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   const [productSizeList, setProductSizeList] = useState([]);
   const [selectColour, setSelectColour] = useState("");
   const [finalObj, setFinalObj] = useState("");
-
+  const [show,setShow]=useState(true); 
   const navigate = useNavigate();
 
   const addCart = (id) => {
@@ -64,9 +64,15 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
          <img src={products.image} height={100} alt="productImage" />
       </div>
     <div className="info">
+      <div  className="infos">
       <h1>{products.prodName}</h1>
+       <p style={{color:"red"}}>R 250</p>
       <p>{products.prodDescription}</p>
-      <div>
+     
+      </div>
+      <br/>
+      <br/>
+         <div className="color">
         {productColours !== 0 ? (
           productColours.map((prod, idx) => {
             const testClick = (prodt) => {
@@ -83,13 +89,15 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
             };
 
             return (
-              <div style={{ display: "inline-flex", width: "100%" }}>
+              <div className="colorblock">
                 <div key={idx} onClick={() => testClick(prod)}>
                   <p
                     style={{
-                      margin: "8px",
-                      padding: "8px",
+                     
+                      padding: "28px",
                       background: "whitesmoke",
+                       margin:"30px",
+                      
                     }}
                   >
                     {prod.colour}
@@ -101,35 +109,42 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
         ) : (
           <div>No product colours available for this product</div>
         )}
-
+      </div>
         {/* Mapping the sizes of the selected colour */}
+
+        <div className="size">
         {productSizeList.map((sizes, idx) => {
           return (
-            <div
+            <div   className="sizeblock"
               style={{ display: "inline-block" }}
             //  create method and create a variable(state) for qty using the decrement and increment functonality.
               onClick={() => {
                 setFinalObj(Object.assign(products,  sizes, {qty: 2,uid: uidd }))
                 console.log(Object.assign(products,  sizes, {qty: 2}));
+        
               }}
-            >
+              >
+                
+              
+                
               <p style={{ background: "yellow", margin: "8px" }}>
                 {sizes.size} : R{sizes.price}
               </p>
             </div>
-          );
-        })}
-      </div>
-
-      </div>
-      <p>{products.productPrice}</p>
-      {/* <div className='btn btn-danger btn-md cart-btn' onClick={() => addCart (individualCartProduct.individualCartProduct)}>Add To Cart </div> */}
-      <div
+           );
+          })}
+         
+     </div>
+     <div
         className="btn btn-danger btn-md cart-btn"
         onClick={() => addCart()}
       >
         Add To Cart{" "}
       </div>
+      </div>
+      <p>{products.productPrice}</p>
+      {/* <div className='btn btn-danger btn-md cart-btn' onClick={() => addCart (individualCartProduct.individualCartProduct)}>Add To Cart </div> */}
+      
     </div>
   );
 }
