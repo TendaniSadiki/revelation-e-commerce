@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import {FaShoppingCart, FaRegHeart} from 'react-icons/fa'
-import {BiLogOut} from 'react-icons/bi'
+import {FaShoppingCart} from 'react-icons/fa'
 import fire from '../Config/Config'
 import './Navbar.css'
 
