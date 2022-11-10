@@ -1,0 +1,24 @@
+
+
+.main-login{
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow-x:hidden ;
+    background: linear-gradient(to right, rgba(255,255,255) 50% );
+    
+}
+
+
+
+.left-side{
+    margin: 2rem 2rem;
+    box-shadow: 0.5rem 0.5rem 2rem -1rem rgb(58, 57, 57);
+    height: 80%;
+    width: 100%;
+}
+.right-side{
+    margin: 2rem 2rem;
+    box-shadow: 0.5rem 0.5rem 2rem -1rem rgb(58, 57, 57);
+    height: 80%;
+    width: 100%;
+}
