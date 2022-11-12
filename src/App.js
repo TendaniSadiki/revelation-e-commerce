@@ -9,10 +9,9 @@ import { NotFound } from './Components/NotFound';
 import { Cart } from './Components/Cart';
 import { AddProduct } from './Components/AddProduct';
 import ProductView from './Components/ProductView';
-// import { Summer } from './Components/Summer';
-// import { Winter } from './Components/Winter';
-// import { Accessories } from './Components/Accessories';
-// import { Sale } from './Components/Sale';
+import Summer from './Components/Summer';
+import Winter from './Components/Winter';
+import Accessories from './Components/Accessories';
 import About from './Components/About';
 import Disclaimer from './Components/Disclaimer';
 import FAQS from './Components/FAQS.js';
@@ -31,10 +30,9 @@ function App() {
         <Route path ="/cart" element={<Cart/>}/>
         <Route path = '/add-product' element={<AddProduct/>}/>
         <Route path = '/product-view' element={<ProductView/>}/>
-        {/* <Route path = '/summer' element={<Summer/>}/>
+        <Route path = '/summer' element={<Summer/>}/>
         <Route path = '/winter' element={<Winter/>}/>
         <Route path = '/accessories' element={<Accessories/>}/>
-        <Route path = '/sale' element={<Sale/>}/> */}
         <Route path = '/about' element={<About/>}/>
         <Route path = '/disclaimer' element={<Disclaimer/>}/>
         <Route path = '/faqs' element={<FAQS/>}/>
