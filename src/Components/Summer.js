@@ -4,6 +4,7 @@ import { Products } from './Products'
 import { onAuthStateChanged, } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 //import { CartProduct } from './CartProducts'
+import './CardStyle.css';
 
 const Summer = (props) => {
     function GetUserUid() {
@@ -77,7 +78,6 @@ const Summer = (props) => {
         <>
             {products.length > 0 && (
                 <div className='container-fluid'>
-                    <h1 className='text-center'>Product</h1>
                     <div className='productBox' >
                         <div>
                             <Products products={products} helloWorld={helloWorld} />
