@@ -95,6 +95,7 @@ const Summer = (props) => {
           <Grid item xs={2} sm={4} md={4} key={index}>
             {products.length > 0 && (
                 <div className='container-fluid'>
+                    <h1 className='text-center'>Product</h1>
                     <div className='productBox' >
                         <div>
                             <Products products={products} helloWorld={helloWorld} />

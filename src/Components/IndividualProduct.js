@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import './CardStyle.css'
 
 export const IndividualProduct = (individualProduct, ID) => {
     console.log(individualProduct)
@@ -19,13 +18,13 @@ export const IndividualProduct = (individualProduct, ID) => {
     return (
         <div className='product'>
             <div className='product-img'>
-                <img src={individualProduct.individualProduct.image} height='180px' justify='center' alt='product-image' />
+                <img src={individualProduct.individualProduct.image} height={100} alt='product-image' />
             </div>
             <div className='product-name'>{individualProduct.individualProduct.prodName}</div>
-            <div className='product-description'>{individualProduct.individualProduct.prodDescription}</div>
-            <div className='product-price'>R{individualProduct.individualProduct.productPrice}</div>
+            <div className='product-desccription'>{individualProduct.individualProduct.prodDescription}</div>
+            {/* <div className='product-price'>R{individualProduct.individualProduct.productPrice}</div> */}
 
-            <div className='btn btn-danger btn-md cart-btn' onClick={() => helloWorld(individualProduct.individualProduct.ID)}>View Product</div>
+            <div className='btn btn-danger btn-md cart-btn' onClick={() => helloWorld(individualProduct.individualProduct.ID)}>Prodcut Preview </div>
             
             
 

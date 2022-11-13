@@ -50,7 +50,7 @@ const Winter = (props) => {
     const [products, setProducts] = useState([])
     const getProduct = async () => {
         // const products = await db.collection('Product').get();
-        const products = await db.collection('inventorystock').where('brandCategory', '==', 'Winter').get();
+        const products = await db.collection('inventorystock').where('brandCategory', '==', 'Summer').get();
         const productArray = [];
         for (var snap of products.docs) {
             var data = snap.data();
