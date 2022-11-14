@@ -135,11 +135,19 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
           })}
          
      </div>
+     <div className="buttons">
      <div
-        className="btn btn-danger btn-md cart-btn"
+        className="cart-btn"
         onClick={() => addCart()}
       >
         Add To Cart{" "}
+      </div>
+      <div
+        className="cart-btn1"
+        onClick={() => addCart()}
+      >
+        BUY NOW{" "}
+      </div>
       </div>
       </div>
       <p>{products.productPrice}</p>
