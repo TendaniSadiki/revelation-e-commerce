@@ -24,8 +24,11 @@ export const IndividualProduct = (individualProduct, ID) => {
             <div className='product-name'>{individualProduct.individualProduct.prodName}</div>
             <div className='product-description'>{individualProduct.individualProduct.prodDescription}</div>
             <div className='product-price'>R{individualProduct.individualProduct.productPrice}</div>
-
-            <div className='btn btn-danger btn-md cart-btn' onClick={() => helloWorld(individualProduct.individualProduct.ID)}>View Product</div>
+              
+             <div>
+                 <div className='btn btn-danger btn-md cart-btn' onClick={() => helloWorld(individualProduct.individualProduct.ID)}>View Product</div>
+             </div> 
+           
             
             
 

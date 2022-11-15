@@ -59,6 +59,8 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   }, []);
 
   return (
+
+    
     <div className="prod">
       <div className="image"> 
          <img src={products.image} height={100} alt="productImage" />
