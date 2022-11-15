@@ -52,8 +52,17 @@
     color: rgb(242, 229, 229);
 }
 
-
-.btn:hover{
+.cart-btn {
+    background-color: rgb(80, 78, 78);
+    border: 1px solid rgb(80, 78, 78);
+    justify-content: center;
+   
+    width: 20px;
+    border-radius: 5px;
+    padding: 2px;
+    color: rgb(242, 229, 229);
+}
+.cart-btn:hover{
     background-color: whitesmoke;
     border: 1.5px solid rgb(80, 78, 78);
     justify-content: center;

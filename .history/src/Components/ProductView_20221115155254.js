@@ -6,7 +6,6 @@ import {Navbar} from './Navbar';
 import _, { size } from "underscore";
 import { uid } from "uid";
 import { onAuthStateChanged } from 'firebase/auth';
-import './ProductView.css'
 
 function ProductVIew(individualProduct, ID, individualCartProduct) {
     const uidd = uid();

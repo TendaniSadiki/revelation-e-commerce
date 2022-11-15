@@ -25,7 +25,7 @@ export const IndividualProduct = (individualProduct, ID) => {
             <div className='product-description'>{individualProduct.individualProduct.prodDescription}</div>
             <div className='product-price'>R{individualProduct.individualProduct.productPrice}</div>
 
-            <button className="btn" onClick={() => helloWorld(individualProduct.individualProduct.ID)}>View Product</button>
+            <div className='btn btn-danger btn-md cart-btn' onClick={() => helloWorld(individualProduct.individualProduct.ID)}>View Product</div>
             
             
 

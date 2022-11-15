@@ -41,23 +41,20 @@
     align-items: center;
     background-color: whitesmoke;
 }
-
-.btn {
+.cart-btn {
     background-color: rgb(80, 78, 78);
     border: 1px solid rgb(80, 78, 78);
     justify-content: center;
-    width: 120px;
-    border-radius: 5px;
+    width: 100px;
+    border-radius: 10px;
     padding: 2px;
     color: rgb(242, 229, 229);
 }
-
-
-.btn:hover{
+.cart-btn:hover{
     background-color: whitesmoke;
     border: 1.5px solid rgb(80, 78, 78);
     justify-content: center;
-    
+    width: 100px;
     border-radius: 10px;
     padding: 2px;
     color: rgb(80, 78, 78);

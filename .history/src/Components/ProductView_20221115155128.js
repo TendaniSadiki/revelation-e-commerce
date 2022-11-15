@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 import {Navbar} from './Navbar';
 import _, { size } from "underscore";
 import { uid } from "uid";
-import { onAuthStateChanged } from 'firebase/auth';
-import './ProductView.css'
-
 function ProductVIew(individualProduct, ID, individualCartProduct) {
     const uidd = uid();
   const location = useLocation();
@@ -81,12 +78,8 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   }, []);
 
   return (
-    <div className="prod">
-      <div className="image"> 
-         <img src={products.image} height={100} alt="productImage" />
-      </div>
-    <div className="info">
-      <div  className="infos">
+    <div>
+      <img src={products.image} height={100} alt="productImage" />
       <h1>{products.prodName}</h1>
        <p style={{color:"red"}}>R 250</p>
       <p>{products.prodDescription}</p>

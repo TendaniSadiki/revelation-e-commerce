@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { IndividualProduct } from './IndividualProduct'
 
 export const Products = ({products, helloWorld}) => {

@@ -53,7 +53,7 @@
 }
 
 
-.btn:hover{
+.cart-btn:hover{
     background-color: whitesmoke;
     border: 1.5px solid rgb(80, 78, 78);
     justify-content: center;
