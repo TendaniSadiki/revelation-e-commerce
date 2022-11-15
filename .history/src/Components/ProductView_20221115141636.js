@@ -148,9 +148,7 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
       >
         Add To Cart{" "}
       </div>
-      </div>
     </div>
-    
   );
 }
 
