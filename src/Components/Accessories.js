@@ -4,21 +4,20 @@ import { Products } from './Products'
 import { onAuthStateChanged, } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 //import { CartProduct } from './CartProducts'
-import './CardStyle.css';
-import { experimentalStyled as styled } from '@mui/material/styles';
+//import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+//import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//   ...theme.typography.body2,
+//   padding: theme.spacing(2),
+//   textAlign: 'center',
+//   color: theme.palette.text.secondary,
+// }))
 
-const Summer = (props) => {
+const Accessories = (props) => {
     function GetUserUid() {
         const [uid, setUid] = useState(null);
         useEffect(() => {
@@ -51,7 +50,7 @@ const Summer = (props) => {
     const [products, setProducts] = useState([])
     const getProduct = async () => {
         // const products = await db.collection('Product').get();
-        const products = await db.collection('inventorystock').where('brandCategory', '==', 'Summer').get();
+        const products = await db.collection('inventorystock').where('brandCategory', '==', 'Accessories').get();
         const productArray = [];
         for (var snap of products.docs) {
             var data = snap.data();
@@ -88,8 +87,7 @@ const Summer = (props) => {
     };
     return (
         <>
-           
-    <Box sx={{ flexGrow: 1 }}>
+           <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Array.from(Array(3)).map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
@@ -113,4 +111,37 @@ const Summer = (props) => {
     )
 }
 
-export default Summer;
+export default Accessories;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import { Grid } from '@mui/material';
+// import AccessoryCard from './AccessoryCard';
+
+// const Accessories = () => {
+//     return (
+//         <>
+//         <Grid container spacing={2}  marginTop={2}  marginLeft={5} marginRight={3} >
+//         <AccessoryCard/>
+//         </Grid>
+           
+       
+//         </>
+//     )
+// }
+
+// export default Accessories;

@@ -60,28 +60,37 @@
     border: 5px solid aqua
 }
 .size{
-    display: flex;
+    display: block;
     width: 100%;
-    height: 30%;
+    height: 25%;
     background-color: orange;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 50px;
     border-radius: 30px;
+    border: #ff6f69 5px solid ;
+    margin: auto;
 }
-.sizeblock{
+.size.sizeblock{
     display: inline-block;
-    margin: 10px;
+    margin: 100px;
   
 }
 
 .sizeblock p{
     font-size: 30px;
     display: flex;
-  
-   
+    
+    background: yellow;
+     
+    
     border: 5px solid whitesmoke;
     border-radius: 30px;
-    margin-top: 50px;
+    margin-top: 10px;
+}
+.sizeblock p:hover{
+
+   background-color: #ff6f69 ;
+ 
 }
 .buttons{
     width: 100%;

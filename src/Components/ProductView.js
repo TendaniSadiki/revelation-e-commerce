@@ -127,7 +127,7 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
                 
               
                 
-              <p style={{ background: "yellow", margin: "8px" }}>
+              <p style={{ margin: "8px" }}>
                 {sizes.size} : R{sizes.price}
               </p>
             </div>

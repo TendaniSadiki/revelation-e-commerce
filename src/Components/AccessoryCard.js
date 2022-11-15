@@ -4,7 +4,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate} from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useState, useEffect } from 'react'
-import { db } from '../../../Config/Config';
+import { db } from '../Config/Config';
 
 const AccessoryCard = (props) => {
 
