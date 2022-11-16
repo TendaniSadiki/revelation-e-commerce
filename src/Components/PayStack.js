@@ -1,19 +1,92 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import PaystackPop from '@paystack/inline-js'
-export const PayStack = () => {
-    const [email, setEmail]=useState("")
-    const [amount, setAmount]=useState("")
+import fire, { auth, db } from '../Config/Config'
+import { onAuthStateChanged } from 'firebase/auth'
+import { Navbar } from './Navbar'
+import { useLocation } from 'react-router-dom'
+
+
+export const PayStack = (props) => {
+
+    const [userDetails, setUserDetails] = useState({});
+    const location = useLocation();
+    console.log('Loca: ', location.state)
+    // const amount= useState(location.state)
+
+    // console.log(this.props.location.state)
+    function GetUserUid() {
+        const [uid, setUid] = useState(null);
+        useEffect(() => {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    setUid(user.uid);
+                }
+            })
+        }, [])
+        return uid;
+    }
+    const uid = GetUserUid();
+    console.log(uid)
+    function GetCurrentUser() {
+        useEffect(() => {
+            const unbn = onAuthStateChanged(auth, userAuth => {
+                if (userAuth) {
+                    fire.firestore().collection("user").doc(userAuth.uid).get().then(snapshot => {
+                        console.log(snapshot.data())
+                        setUserDetails(snapshot.data())
+                    })
+                    
+                } else {
+
+
+                    // setUser(null)
+                }
+            })
+            return unbn
+        }, [])
+    }
+    GetCurrentUser()
+
+   
+
+   
+    const [cartProducts, setCartProduct] = useState([])
+
+    // getting cart product from the firestore collection and updating the state
+    const cardProduct = []
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const [email, setEmail] = useState("")
+    const [amount, setAmount]=useState(location.state.total)
     const [firstName, setFirstName]=useState("")
     const [lastName, setLastName]=useState("")
+
+  
     const paywithpaystack=(e)=>{
         e.preventDefault()
+        console.log(userDetails)
+        console.log("current amount ", amount)
         const paystack = new PaystackPop ()
         paystack.newTransaction({
             key:"pk_test_145aacfe44042ba956a6f2039dda1dd7477f95a3",
             amount:amount*100,
-            email:email,
+            email:userDetails.Email,
             firstName:firstName,
-            lastName:lastName,
+            lastName:userDetails.FullName,
             onSuccess(transaction){
                 let message=`Payment Complete! Reference ${transaction.reference}`
                 alert(message)
@@ -31,31 +104,20 @@ export const PayStack = () => {
     }
   return (
     <div className='w3-container w3-row'>
-    <div className='w3-container w3-blue'><h3>Make Payment</h3></div>
-    
-    <form id="paymentForm" className=''>
-    <div className='form-group'>
-        <label htmlFor='email'>Email Address</label>
-        <input type="email" id="email-address" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-        </div>
-        <div className='form-group'>
-        <label htmlFor='amount'>Amount</label>
-        <input type="tel" id="amount" value={amount} onChange={(e)=>setAmount(e.target.value)}/>
-        </div>
-        <div className='form-group'>
-        <label htmlFor='email'>First Name</label>
-        <input type="text" id="first-name" value={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
-    </div>
-    
-    <div className='form-group'>
-        <label htmlFor='last-name' >Last Name</label>
-        <input type="text" id="last-name" value={lastName} onChange={(e)=>setLastName(e.target.value)}/>
-    </div>
+       <h1>Make Payment</h1>
+       <p>Customer Name: {userDetails.FullName}</p>
+       <p>Customer Email: {userDetails.Email}</p>   
+        <p>Amount to pay : R {amount}</p>
+
+<p>{firstName}</p>
+
+  
     <div className='form-submit'>
     
-        <button type="submit" onClick={paywithpaystack}>Pay</button>
-    </div>
-    </form>
+    <button type="submit" onClick={paywithpaystack}>Pay</button>
+</div>
+
+    
     </div>
   )
 }
