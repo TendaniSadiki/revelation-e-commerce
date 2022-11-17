@@ -51,7 +51,7 @@ export default function Catalogues() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', paddingTop: '50px' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', paddingTop: '50px', paddingLeft: '10px' }}>
          <Tabs value={value} onChange={handleChange} centered>
           <Tab label="Summer" {...a11yProps(0)} />
           <Tab label="Winter" {...a11yProps(1)} />

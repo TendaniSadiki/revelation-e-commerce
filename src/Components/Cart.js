@@ -195,7 +195,8 @@ export const Cart = () => {
     let i = 0;
     let overallAmount = 0;
     return (
-        <>Cart
+        <>
+        <h1 style={{color:'grey', maginLeft:'2%', fontSize:'40px'}}>Cart</h1>
         
             <div>
                 {cartProducts.map((res,i,arr) => {
@@ -216,8 +217,9 @@ export const Cart = () => {
                 //    console.log(getTotalAmount())
 
                     return (
-                        <div style={{background: 'blue', margin: 8, color:'whitesmoke'}}>
-                              <img src={res.image} height={100} alt='product-image' />
+                        <div style={{background: 'whitesmoke', margin: 8, color:'grey', display: 'flex'}}>
+                           <div style={{padding:'2%'}}><img src={res.image} height={280} alt='product-image' /></div>
+                            <div style={{marginLeft: '10%',marginTop: '1%', fontSize: '20px', fontWeight: '500', borderLeft: '1px solid grey', paddingLeft: '2%', marginBottom: ' 1%' }}>
                             <p>{res.brandCategory}</p>
                             <p>{res.prodType}</p>
                             <p>{res.prodName}</p>
@@ -226,13 +228,14 @@ export const Cart = () => {
                             <p>{res.colour}</p>
                             <p>{res.size}</p>
                             <p>{res.productCode}</p>
-                            
-                
+                            </div>
                         </div>
                         
                     )
                 })}
-                <button onClick={() => checkOut(overallAmount)}>Checlkout</button>
+                <button 
+                style={{border: '1px solid transparent', backgroundColor: ' grey', fontSize: '18px', justifyContent: 'center', padding: '1%', width: '20%', color: 'whitesmoke', fontWeight: '500', alignSelf: 'center', margin: '2%'}}
+                onClick={() => checkOut(overallAmount)}>Checkout</button>
 
                                 {/* <Link to={{
                     pathname: `/paystack`,

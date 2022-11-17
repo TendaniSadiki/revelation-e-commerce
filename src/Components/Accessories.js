@@ -4,18 +4,19 @@ import { Products } from './Products'
 import { onAuthStateChanged, } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 //import { CartProduct } from './CartProducts'
-//import { experimentalStyled as styled } from '@mui/material/styles';
+import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-//import Paper from '@mui/material/Paper';
+import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//   ...theme.typography.body2,
-//   padding: theme.spacing(2),
-//   textAlign: 'center',
-//   color: theme.palette.text.secondary,
-// }))
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}))
 
 const Accessories = (props) => {
     function GetUserUid() {
@@ -101,7 +102,11 @@ const Accessories = (props) => {
                 </div>
             )}
             {products.length < 1 && (
-                <div className='container-fluid'>Please wait...</div>
+                <div className='container-fluid'>
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress />
+                    </Box>
+                </div>
             )}
           </Grid>
         ))}

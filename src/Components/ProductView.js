@@ -4,6 +4,7 @@ import fire, { auth, db } from "../Config/Config";
 import { useNavigate } from "react-router-dom";
 import _, { size } from "underscore";
 import { uid } from "uid";
+
 function ProductVIew(individualProduct, ID, individualCartProduct) {
   // const uidd = uid();
 
@@ -68,8 +69,8 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   }, []);
 
   return (
-    <div>
-      <img src={products.image} height={100} alt="productImage" />
+    <div style={{ background: "whitesmoke", justifyContent: "center", padding: "200px", overflow: "hidden"}}>
+      <img src={products.image} height={300} alt="productImage" />
       <h1>{products.prodName}</h1>
       <p>{products.prodDescription}</p>
       <p>{products.prodType}</p>
@@ -121,7 +122,7 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
                 console.log(Object.assign(products, sizes ));
               }}
             >
-              <p style={{ background: "yellow", margin: "8px" }}>
+              <p style={{ background: "whitesmoke", margin: "8px" }}>
                 {sizes.size} : R{sizes.price}
               </p>
             </div>
