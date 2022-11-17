@@ -69,7 +69,7 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   }, []);
 
   return (
-    <div style={{ background: "whitesmoke", justifyContent: "center", padding: "200px", overflow: "hidden"}}>
+    <div style={{ background: "whitesmoke", justifyContent: "center", padding: "7%", overflow: "hidden"}}>
       <img src={products.image} height={300} alt="productImage" />
       <h1>{products.prodName}</h1>
       <p>{products.prodDescription}</p>
@@ -133,6 +133,7 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
       {/* <div className='btn btn-danger btn-md cart-btn' onClick={() => addCart (individualCartProduct.individualCartProduct)}>Add To Cart </div> */}
       <div
         className="btn btn-danger btn-md cart-btn"
+        style={{cursor: 'pointer'}}
         onClick={() => addCart()}
       >
         Add To Cart{" "}

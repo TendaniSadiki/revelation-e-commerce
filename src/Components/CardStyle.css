@@ -49,6 +49,7 @@
     border-radius: 10px;
     padding: 2px;
     color: rgb(242, 229, 229);
+    cursor: pointer;
 }
 .cart-btn:hover{
     background-color: whitesmoke;

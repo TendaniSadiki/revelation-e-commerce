@@ -234,8 +234,8 @@ export const Cart = () => {
                     )
                 })}
                 <button 
-                style={{border: '1px solid transparent', backgroundColor: ' grey', fontSize: '18px', justifyContent: 'center', padding: '1%', width: '20%', color: 'whitesmoke', fontWeight: '500', alignSelf: 'center', margin: '2%'}}
-                onClick={() => checkOut(overallAmount)}>Checkout</button>
+                style={{border: '1px solid transparent', backgroundColor: ' grey', fontSize: '18px', justifyContent: 'center', padding: '1%', width: '20%', color: 'whitesmoke', fontWeight: '500', alignSelf: 'center', margin: '2%', cursor: 'pointer'}}
+c                onClick={() => checkOut(overallAmount)}>Checkout</button>
 
                                 {/* <Link to={{
                     pathname: `/paystack`,
