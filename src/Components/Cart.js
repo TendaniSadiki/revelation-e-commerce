@@ -10,14 +10,14 @@ import { CartProduct } from './CartProduct'
 import { Navbar } from './Navbar'
 import { PayStack } from './PayStack'
 import { Link } from 'react-router-dom'
-
+import { doc, updateDoc, increment } from "firebase/firestore";
+import {FaMinusCircle, FaPlusCircle} from 'react-icons/fa'
+import {RiDeleteBin5Line} from 'react-icons/ri'
 
 import { Products } from './Products'
 
 export const Cart = () => {
     const navigate = useNavigate();
-
-
     function GetUserUid() {
         const [uid, setUid] = useState(null);
         useEffect(() => {
@@ -40,28 +40,19 @@ export const Cart = () => {
                         setUser(snapshot.data().FullName)
                     })
                 } else {
-
-
                     setUser(null)
                 }
             })
             return unbn
         }, [])
         return user;
-
-
     }
     const user = GetCurrentUser()
     const addCart = () => {
         console.log('Hello world')
     };
-   
-
-
-
     //state of the cart
     const [cartProducts, setCartProduct] = useState([])
-
     // getting cart product from the firestore collection and updating the state
     const cardProduct = []
     useEffect(() => {
@@ -69,13 +60,10 @@ export const Cart = () => {
         //     if(user){
         db.collection("cart").where('uid', '==', uid).onSnapshot(snapshort => {
             snapshort.forEach(newCart => {
-                console.log(newCart.data())
-                cardProduct.push(newCart.data())
+                console.log({...newCart.data(), ...{id: newCart.id}})
+                cardProduct.push({...newCart.data(), ...{id: newCart.id}})
             })
-
-         
             setCartProduct(cardProduct)
-
         })
         //     }else{
         //         console.log("user is not signed in to retive cart")
@@ -83,32 +71,21 @@ export const Cart = () => {
         // })
         console.log(cardProduct)
     }, [])
-
-
-
-
     // const [products, setProducts] = useState([])
-
     // const getProduct = async () => {
     //     // const products = await db.collection('Product').get();
     //     const products = await db.collection('cart').get();
-
     //     // const productArray = [];
     //     for (var snap of cardProduct.docs) {
     //         var data = snap.data();
     //         data.ID = snap.id;
-
     //         cartProducts.push({
     //             ...data
     //         })
     //         if (cartProducts.length === cartProducts.docs.length) {
     //             setProducts(cartProducts)
-
-
     //         }
-
     //     }
-
     // }
     // console.log(cardProduct)
     // const qty = cartProducts.map(cartProduct =>{
@@ -158,13 +135,11 @@ export const Cart = () => {
     //         <div className='container-fluid'>
     //         <h1 className='text-center'>Cart</h1>
     //         <div className='products-box'>
-
     //             {/* <CartProducts cardProduct={cardProduct}
     //                 cartProductIncrease={cartProductIncrease}
     //                 cartProductDecrease={cartProductDecrease}
     //             /> */}
     //         </div>
-
     //         <div className='summery-box'>
     //         <h5>Cart Summary</h5>
     //         <br></br>
@@ -178,11 +153,8 @@ export const Cart = () => {
     //         </div>
     //     )
     //     }
-
     //     {cardProduct.length<1 &&(
     //         <div className='container-fluid'>No Products to show</div>
-
-
     //     )
     //     }
     //            {/* <Products products={products} helloWorld={helloWorld} /> */}
@@ -192,18 +164,59 @@ export const Cart = () => {
     const checkOut =(overallAmount) => {
         navigate('/paystack', {state:{total:overallAmount}});
     }
-    let i = 0;
+    const handleDecrease = async (res)=>{
+        const cartQtyRef = doc(db, "cart", res.id);
+            await updateDoc(cartQtyRef, {
+                qty: increment(-1),
+            }).then(() => {
+                db.collection("cart").doc(res.id).get().then(async(snapshort) => {
+                    console.log('hello', snapshort.data())
+                await updateDoc(cartQtyRef, {
+                    total: parseFloat(snapshort.data().qty) * parseFloat(snapshort.data().price)
+                }).then(() => {
+                    console.log('Increment done!')
+                });
+            }).catch(er => {
+                console.log(er.message)
+            });
+        });
+    }
+    const handleIncrement = async (res)=>{
+        const cartQtyRef = doc(db, "cart", res.id);
+            await updateDoc(cartQtyRef, {
+                qty: increment(1),
+            }).then(() => {
+                db.collection("cart").doc(res.id).get().then(async(snapshort) => {
+                    console.log('hello', snapshort.data())
+                await updateDoc(cartQtyRef, {
+                    total: parseFloat(snapshort.data().qty) * parseFloat(snapshort.data().price)
+                }).then(() => {
+                    console.log('Increment done!')
+                });
+            }).catch(er => {
+                console.log(er.message)
+            });
+        });
+    }
+    const handleDelete=(res)=>{
+        db.collection('cart').doc(res.id).delete().then(()=>{
+            console.log("document deleted=>", res.id)
+        })
+      }
     let overallAmount = 0;
+    let quantity = 1;
     return (
-        <>
-        <h1 style={{color:'grey', maginLeft:'2%', fontSize:'40px'}}>Cart</h1>
-        
+        <>Cart
             <div>
-                {cartProducts.map((res,i,arr) => {
-                      getPrice.push(arr[i].price*res.qty);
-                      if (res.price)
+                {cartProducts.map(res=> {
+                      if (res.price){
                       overallAmount = overallAmount + (parseFloat(res.price) * parseFloat(res.qty));
                       console.log('chek', overallAmount)
+                      }
+                       if(res.qty>1){
+                    quantity = (parseFloat(res.qty))
+                    console.log("Current Quantity here:",quantity)
+                  }
                 //     const getTotalAmount=()=>{
                 //      let getAmount = res.price;
                 //      let getQty = res.qty;
@@ -225,6 +238,9 @@ export const Cart = () => {
                             <p>{res.colour}</p>
                             <p>{res.size}</p>
                             <p>{res.productCode}</p>
+                            <p><button onClick={(v) =>handleDecrease(res)}style={{background:'red'}}><FaMinusCircle size={20} /></button>Quantity:{res.qty}<button onClick={(v) =>handleIncrement(res)}style={{background:'green'}}>
+                            <FaPlusCircle size={20}/></button>
+                            <button onClick={(v)=>handleDelete(res)} style={{background:'red'}}><RiDeleteBin5Line size={20}/></button></p>
                             </div>
                         </div>
                         
