@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,10 +8,9 @@ import Summer  from './Summer';
 import Winter from './Winter';
 import Accessories from './Accessories';
 
-
-function TabPanel(props) {
+ function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+  
   return (
     <div
       role="tabpanel"
@@ -51,7 +50,7 @@ export default function Catalogues() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', paddingTop: '50px' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', paddingTop: '50px', paddingLeft: '10px' }}>
          <Tabs value={value} onChange={handleChange} centered>
           <Tab label="Summer" {...a11yProps(0)} />
           <Tab label="Winter" {...a11yProps(1)} />
@@ -59,8 +58,8 @@ export default function Catalogues() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        
-        <Summer/>
+        <div className="summer"><Summer/></div>
+       
       </TabPanel>
       <TabPanel value={value} index={1}>
        <Winter/>

@@ -9,15 +9,14 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-
+import CircularProgress from '@mui/material/CircularProgress';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
 const Summer = (props) => {
     function GetUserUid() {
         const [uid, setUid] = useState(null);
@@ -88,10 +87,9 @@ const Summer = (props) => {
     };
     return (
         <>
-           
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {Array.from(Array(3)).map((_, index) => (
+        {Array.from(Array(4)).map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
             {products.length > 0 && (
                 <div className='container-fluid'>
@@ -103,7 +101,11 @@ const Summer = (props) => {
                 </div>
             )}
             {products.length < 1 && (
-                <div className='container-fluid'>Please wait...</div>
+                <div className='container-fluid'>
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress />
+                    </Box>
+                </div>
             )}
           </Grid>
         ))}
@@ -112,5 +114,18 @@ const Summer = (props) => {
         </>
     )
 }
-
 export default Summer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

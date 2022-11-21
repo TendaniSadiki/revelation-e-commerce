@@ -1,0 +1,21 @@
+[debug] [2022-11-18T00:16:11.115Z] ----------------------------------------------------------------------
+[debug] [2022-11-18T00:16:11.216Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Kamogelo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-11-18T00:16:11.229Z] CLI Version:   11.16.1
+[debug] [2022-11-18T00:16:11.232Z] Platform:      win32
+[debug] [2022-11-18T00:16:11.233Z] Node Version:  v16.14.2
+[debug] [2022-11-18T00:16:14.072Z] Time:          Fri Nov 18 2022 02:16:11 GMT+0200 (South Africa Standard Time)
+[debug] [2022-11-18T00:16:14.075Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-18T00:16:14.736Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-18T00:16:14.741Z] > authorizing via signed-in user (kmodibediii@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Kamogelo\revelation-e-commerce
+

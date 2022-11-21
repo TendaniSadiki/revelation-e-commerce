@@ -1,0 +1,120 @@
+.prod{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: absolute;
+    float: left;
+    left: 0px;
+    display: flex;
+    margin: auto;
+}
+.image{
+    width: 50%;
+    height: 100%;
+    background-image: linear-gradient(#ff6f69,#ffcc5c);
+    margin: auto;
+}
+.image img{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    border-radius: 15px;
+    
+}
+.info{
+    width: 50%;
+    height: 90%;
+    background-color: transparent;
+    margin: auto;
+}
+.info .infos{
+   text-align: left;
+   margin-left: 50px;
+}
+.infos h1{
+    font-size: 50px;
+ }
+ .infos p{
+    font-size: 25px;
+ }
+.color{
+    display: flex;
+    width: 100%;
+    height: 22%;
+    background-color: transparent;
+    border-radius: 30px;
+    margin: auto;
+}
+.colorblock{
+    display: flex;
+    margin:auto;
+    border: 5px solid whitesmoke;
+    border-radius: 30px;
+
+}
+.colorblock:hover{
+
+   
+    border: 5px solid aqua
+}
+.size{
+    display: block;
+    width: 100%;
+    height: 25%;
+    background-color: orange;
+    display: inline-block;
+    margin-top: 50px;
+    border-radius: 30px;
+    border: #ff6f69 5px solid ;
+    margin: auto;
+}
+.size.sizeblock{
+    display: inline-block;
+    margin: 100px;
+  
+}
+
+.sizeblock p{
+    font-size: 30px;
+    display: flex;
+    
+    background: yellow;
+     
+    
+    border: 5px solid whitesmoke;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+.sizeblock p:hover{
+
+   background-color: #ff6f69 ;
+ 
+}
+.buttons{
+    width: 100%;
+    height: 15%;
+   
+    display: flex;
+    margin: auto;
+}
+.cart-btn{
+    width: 30%;
+    height: 45%;
+    border: 5px solid #ff6f69;
+    border-radius: 50px;
+    margin: auto;
+    text-align: center;
+    margin-top: auto;
+    font-size: 40PX;
+}.cart-btn1{
+    width: 30%;
+    height: 45%;
+    background-color:  #ff6f69;
+    border-radius: 50px;
+    margin: auto;
+    text-align: center;
+    margin-top: auto;
+    font-size: 40PX;
+}
