@@ -163,6 +163,7 @@ export const Cart = () => {
     let getPrice=[];
     const checkOut =(overallAmount) => {
         navigate('/paystack', {state:{total:overallAmount}});
+        
     }
     const handleDecrease = async (res)=>{
         const cartQtyRef = doc(db, "cart", res.id);
@@ -201,8 +202,14 @@ export const Cart = () => {
     const handleDelete=(res)=>{
         db.collection('cart').doc(res.id).delete().then(()=>{
             console.log("document deleted=>", res.id)
+            
         })
       }
+    //   const handleUpdateDelete=(res)=>{
+    //     db.collection('cart').doc(res.id).where("qty", "===","0").delete().then(()=>{
+    //         console.log("Item deleted", res.id)
+    //     })
+    //   }
     let overallAmount = 0;
     let quantity = 1;
     return (
@@ -235,6 +242,7 @@ export const Cart = () => {
                             <p>{res.prodName}</p>
                             <p>{res.prodDiscription}</p>
                             <p>R{res.price}</p>
+                            <p>R{res.price * res.qty}</p>
                             <p>{res.colour}</p>
                             <p>{res.size}</p>
                             <p>{res.productCode}</p>
