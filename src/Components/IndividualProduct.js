@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './CardStyle.css'
 
@@ -16,6 +16,10 @@ export const IndividualProduct = (individualProduct, ID) => {
         helloWorld(individualProduct.helloWorld)
     }
 
+    const[popup,setPop]=useState(false);
+    const handleClicKopen=()=>{
+        setPop(!popup)
+    }
     return (
         <div className='product'>
             <div className='product-img'>
@@ -26,7 +30,8 @@ export const IndividualProduct = (individualProduct, ID) => {
             <div className='product-price'>R{individualProduct.individualProduct.productPrice}</div>
               
              <div>
-                 <div className='btn btn-danger btn-md cart-btn' onClick={() => helloWorld(individualProduct.individualProduct.ID)}>View Product</div>
+                 <div className='btn' onClick={() => helloWorld(individualProduct.individualProduct.ID)}>View Product</div>
+
              </div> 
            
             

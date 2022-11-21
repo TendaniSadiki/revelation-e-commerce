@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import _, { size } from "underscore";
 import { uid } from "uid";
 import "./ProductView.css"
-
 function ProductVIew(individualProduct, ID, individualCartProduct) {
-    const uidd = uid();
+  // const uidd = uid();
+
   const location = useLocation();
   const [products, setProducts] = useState({});
   const [productColours, setProductColours] = useState([]);
@@ -15,23 +15,33 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   const [productSizeList, setProductSizeList] = useState([]);
   const [selectColour, setSelectColour] = useState("");
   const [finalObj, setFinalObj] = useState("");
-  const [show,setShow]=useState(true); 
+  const [uid, setUid] = useState(null);
+
+
   const navigate = useNavigate();
 
   const addCart = (id) => {
     navigate('/cart');
-
-    db
-      .collection("cart")
-      .doc(finalObj.colour + '_' + finalObj.size + '_' + finalObj.productCode).set(finalObj).then(() => {
+    db.collection("cart")
+      .doc(finalObj.colour + '_' + finalObj.size + '_' + finalObj.productCode).set({...finalObj, ...{uid: uid}}).then(() => {
         console.log('Finished!!')
       })
-      
+
     // console.log("Hi", finalObj);
   };
 
   let colours = [];
   useEffect(() => {
+    // const uid = GetUserUid();
+    // console.log(uid)
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log(user.uid); 
+        setUid(uid);
+      }
+    });
+  
     const products = db
       .collection("inventorystock")
       .doc(location.state.id)
@@ -59,8 +69,6 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
   }, []);
 
   return (
-
-    
     <div className="prod">
       <div className="image"> 
          <img src={products.image} height={100} alt="productImage" />
@@ -68,13 +76,10 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
     <div className="info">
       <div  className="infos">
       <h1>{products.prodName}</h1>
-       <p style={{color:"red"}}>R 250</p>
       <p>{products.prodDescription}</p>
-     
+      <p>{products.prodType}</p>
       </div>
-      <br/>
-      <br/>
-         <div className="color">
+      <div className="color">
         {productColours !== 0 ? (
           productColours.map((prod, idx) => {
             const testClick = (prodt) => {
@@ -95,11 +100,9 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
                 <div key={idx} onClick={() => testClick(prod)}>
                   <p
                     style={{
-                     
                       padding: "28px",
                       background: "whitesmoke",
                        margin:"30px",
-                      
                     }}
                   >
                     {prod.colour}
@@ -111,33 +114,29 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
         ) : (
           <div>No product colours available for this product</div>
         )}
-      </div>
-        {/* Mapping the sizes of the selected colour */}
 
-        <div className="size">
+        {/* Mapping the sizes of the selected colour */}
         {productSizeList.map((sizes, idx) => {
           return (
-            <div   className="sizeblock"
+            <div className="size"
               style={{ display: "inline-block" }}
-            //  create method and create a variable(state) for qty using the decrement and increment functonality.
+              //  create method and create a variable(state) for qty using the decrement and increment functonality.
+
               onClick={() => {
-                setFinalObj(Object.assign(products,  sizes, {qty: 2,uid: uidd }))
-                console.log(Object.assign(products,  sizes, {qty: 2}));
-        
+                setFinalObj(Object.assign(products, sizes))
+                console.log(Object.assign(products, sizes ));
               }}
-              >
-                
-              
-                
-              <p style={{ margin: "8px" }}>
+            >
+              <p style={{ background: "yellow", margin: "8px" }}>
                 {sizes.size} : R{sizes.price}
               </p>
             </div>
-           );
-          })}
-         
-     </div>
-     <div className="buttons">
+          );
+        })}
+      </div>
+      <p>{products.productPrice}</p>
+      {/* <div className='btn btn-danger btn-md cart-btn' onClick={() => addCart (individualCartProduct.individualCartProduct)}>Add To Cart </div> */}
+      <div className="buttons">
      <div
         className="cart-btn"
         onClick={() => addCart()}
@@ -152,9 +151,6 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
       </div>
       </div>
       </div>
-      <p>{products.productPrice}</p>
-      {/* <div className='btn btn-danger btn-md cart-btn' onClick={() => addCart (individualCartProduct.individualCartProduct)}>Add To Cart </div> */}
-      
     </div>
   );
 }
