@@ -16,6 +16,7 @@ import About from './Components/About';
 import Disclaimer from './Components/Disclaimer';
 import FAQS from './Components/FAQS.js';
 import Terms from './Components/Terms';
+import Order from './Components/Order';
 import { PayStack } from './Components/PayStack';
 
 function App() {

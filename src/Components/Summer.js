@@ -10,8 +10,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
-
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -19,7 +17,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
 const Summer = (props) => {
     function GetUserUid() {
         const [uid, setUid] = useState(null);
@@ -90,7 +87,6 @@ const Summer = (props) => {
     };
     return (
         <>
-           
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Array.from(Array(4)).map((_, index) => (
@@ -118,5 +114,4 @@ const Summer = (props) => {
         </>
     )
 }
-
 export default Summer;

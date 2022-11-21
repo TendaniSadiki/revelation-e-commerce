@@ -10,7 +10,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -18,7 +17,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }))
-
 const Winter = (props) => {
     function GetUserUid() {
         const [uid, setUid] = useState(null);
@@ -116,5 +114,4 @@ const Winter = (props) => {
         </>
     )
 }
-
 export default Winter;
