@@ -59,8 +59,8 @@ export default function Catalogues() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
+        <div className="summer"><Summer/></div>
         
-        <Summer/>
       </TabPanel>
       <TabPanel value={value} index={1}>
        <Winter/>

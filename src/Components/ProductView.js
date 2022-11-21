@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import fire, { auth, db } from "../Config/Config";
 import { useNavigate } from "react-router-dom";
+import {Navbar} from './Navbar';
 import _, { size } from "underscore";
 import { uid } from "uid";
+import { onAuthStateChanged } from 'firebase/auth';
+import './ProductView.css'
+
 
 function ProductVIew(individualProduct, ID, individualCartProduct) {
   // const uidd = uid();
@@ -19,7 +23,27 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
 
 
   const navigate = useNavigate();
+  function GetCurrentUser() {
+    const [user, setUser] = useState(null)
+    useEffect(() => {
+        const unbn = onAuthStateChanged(auth, user => {
+            if (user) {
+                fire.firestore().collection("user").doc(user.uid).get().then(snapshot => {
+                    setUser(snapshot.data().FullName)
+                })
+            } else {
 
+
+                setUser(null)
+            }
+        })
+        return unbn
+    }, [])
+    return user;
+
+
+}
+  const user = GetCurrentUser();
   const addCart = (id) => {
     navigate('/cart');
     db.collection("cart")
@@ -139,7 +163,11 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
       >
         Add To Cart{" "}
       </div>
+      <p>{products.productPrice}</p>
+      {/* <div className='btn btn-danger btn-md cart-btn' onClick={() => addCart (individualCartProduct.individualCartProduct)}>Add To Cart </div> */}
+      
     </div>
+    
   );
 }
 
