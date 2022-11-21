@@ -32,8 +32,9 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
 
   let colours = [];
   useEffect(() => {
-    // const uid = GetUserUid();
+     // const uid = GetUserUid();
     // console.log(uid)
+
 
     auth.onAuthStateChanged(user => {
       if (user) {

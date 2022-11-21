@@ -210,9 +210,6 @@ export const Cart = () => {
                 //      let totalPrice = getAmount*getQty
                 //      console.log("this is the total ",totalPrice)
                 //      return {totalPrice};
-                          
-                        
-                        
                 //     }
                 //    console.log(getTotalAmount())
 
