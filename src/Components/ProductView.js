@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import fire, { auth, db } from "../Config/Config";
 import { useNavigate } from "react-router-dom";
-import {Navbar} from './Navbar';
 import _, { size } from "underscore";
 import { uid } from "uid";
 import { onAuthStateChanged } from 'firebase/auth';
 import './ProductView.css'
+
 function ProductVIew(individualProduct, ID, individualCartProduct) {
   // const uidd = uid();
   const location = useLocation();

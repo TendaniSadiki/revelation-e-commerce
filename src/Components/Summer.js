@@ -114,6 +114,7 @@ const Summer = (props) => {
         </>
     )
 }
+<<<<<<< HEAD
 export default Summer;
 
 
@@ -129,3 +130,6 @@ export default Summer;
 
 
 
+=======
+export default Summer;
+>>>>>>> 902c510d64efacd5fd5e7e9a6695f8813471a8cd
