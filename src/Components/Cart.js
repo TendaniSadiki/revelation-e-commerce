@@ -144,7 +144,7 @@ export const Cart = () => {
             <h1 style={{color: 'grey', fontSize: '50px', padding: '0 1%'}}>Cart</h1>
             <Link to='/' style={{textDecoration: 'none', float: 'right', color: 'grey', marginTop: '-80px', marginRight: '1%'}}><h4>Back To Home</h4></Link>
             <div style={{backgroundColor: 'white', padding: '2%', borderRadius: '30px'}}>
-                {cartProducts.map(res => {
+            {cartProducts.map(res => {
                     if (res.price) {
                         overallAmount = overallAmount + (parseFloat(res.price) * parseFloat(res.qty));
                         console.log('chek', overallAmount)

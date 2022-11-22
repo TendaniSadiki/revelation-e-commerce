@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,10 +8,9 @@ import Summer  from './Summer';
 import Winter from './Winter';
 import Accessories from './Accessories';
 
-
-function TabPanel(props) {
+ function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+  
   return (
     <div
       role="tabpanel"
@@ -60,7 +59,7 @@ export default function Catalogues() {
       </Box>
       <TabPanel value={value} index={0}>
         <div className="summer"><Summer/></div>
-        
+       
       </TabPanel>
       <TabPanel value={value} index={1}>
        <Winter/>
