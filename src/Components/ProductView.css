@@ -68,7 +68,6 @@
     display: inline-block;
     margin-top: 50px;
     border-radius: 30px;
-    border: #ff6f69 5px solid ;
     margin: auto;
 }
 .size.sizeblock{
@@ -103,16 +102,15 @@
 .cart-btn{
     width: 30%;
     height: 45%;
-    border: 5px solid #ff6f69;
     border-radius: 50px;
     margin: auto;
     text-align: center;
     margin-top: auto;
     font-size: 40PX;
-}.cart-btn1{
+}
+.cart-btn1{
     width: 30%;
     height: 45%;
-    background-color:  #ff6f69;
     border-radius: 50px;
     margin: auto;
     text-align: center;

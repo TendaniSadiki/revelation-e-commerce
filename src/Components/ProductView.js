@@ -94,42 +94,44 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
 
   return (
     <div style={{ background: "whitesmoke", justifyContent: "center", padding: "7%", overflow: "hidden"}}>
+      <h1 style={{justifyContent: 'center', color: 'grey'}}>Product View</h1>
       <img src={products.image} height={300} alt="productImage" />
-      <h1>{products.prodName}</h1>
-      <p>{products.prodDescription}</p>
-      <p>{products.prodType}</p>
-      <div>
-        {productColours !== 0 ? (
-          productColours.map((prod, idx) => {
-            const testClick = (prodt) => {
-              setSelectColour(prodt.colour);
-              console.log(prodt.colour);
-              let sizeList = [];
-              productColoursList.find((x) => {
-                if (x.colour == prodt.colour) {
-                  sizeList.push(x);
-                }
-              });
-              console.log("hello", sizeList);
-              setProductSizeList(sizeList);
-            };
+      <h2>{products.prodName}</h2>
+      <h4>{products.prodDescription}</h4>
+      <h5>Type: {products.prodType}</h5>
+        <div>
+          {productColours !== 0 ? (
+            productColours.map((prod, idx) => {
+              const testClick = (prodt) => {
+                setSelectColour(prodt.colour);
+                console.log(prodt.colour);
+                let sizeList = [];
+                productColoursList.find((x) => {
+                  if (x.colour == prodt.colour) {
+                    sizeList.push(x);
+                  }
+                });
+                console.log("hello", sizeList);
+                setProductSizeList(sizeList);
+              };
 
-            return (
-              <div style={{ display: "inline-flex", width: "100%" }}>
-                <div key={idx} onClick={() => testClick(prod)}>
-                  <p
-                    style={{
-                      margin: "8px",
-                      padding: "8px",
-                      background: "whitesmoke",
-                    }}
+              return (  
+                <div style={{ display: "flex", width: "100%" }}>
+                  <div key={idx} onClick={() => testClick(prod)}
                   >
-                    {prod.colour}
-                  </p>
-                </div>
-              </div>
-            );
-          })
+                    <p
+                      style={{
+                        margin: "8px",
+                        padding: "8px",
+                        fontWeight: "400",
+                      }}
+                    >
+                      {prod.colour}
+                    </p>
+                  </div>
+                </div> 
+              );
+            })
         ) : (
           <div>No product colours available for this product</div>
         )}

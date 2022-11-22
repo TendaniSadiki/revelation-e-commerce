@@ -90,11 +90,6 @@ const Summer = (props) => {
     };
     return (
         <>
-           
-
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {Array.from(Array(4)).map((_, index) => (
 
     <Box sx={{ flexGrow: 1 }} marginLeft={4}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 20 }}>
@@ -122,7 +117,7 @@ const Summer = (props) => {
       </Grid>
     </Box>
         </>
-    )
-}
+)}
+
 
 export default Summer;

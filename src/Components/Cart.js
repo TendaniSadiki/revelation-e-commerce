@@ -1,6 +1,3 @@
-
-
-
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
 import { FaIgloo } from 'react-icons/fa'
@@ -10,14 +7,16 @@ import { CartProduct } from './CartProduct'
 import { Navbar } from './Navbar'
 import { PayStack } from './PayStack'
 import { Link } from 'react-router-dom'
-
-
+import { FaMinusCircle, FaPlusCircle } from 'react-icons/fa'
+import { RiDeleteBin5Line } from 'react-icons/ri'
 import { Products } from './Products'
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { Timestamp } from 'firebase/firestore'
+import PaystackPop from '@paystack/inline-js'
 
 export const Cart = () => {
     const navigate = useNavigate();
-
-
+    const [userObj, setUserObj] = useState({})
     function GetUserUid() {
         const [uid, setUid] = useState(null);
         useEffect(() => {
@@ -32,36 +31,26 @@ export const Cart = () => {
     const uid = GetUserUid();
     console.log(uid)
     function GetCurrentUser() {
-        const [user, setUser] = useState(null)
         useEffect(() => {
             const unbn = onAuthStateChanged(auth, user => {
                 if (user) {
                     fire.firestore().collection("user").doc(user.uid).get().then(snapshot => {
-                        setUser(snapshot.data().FullName)
+                        setUserObj(snapshot.data())
                     })
                 } else {
-
-
-                    setUser(null)
+                    setUserObj(null)
                 }
             })
             return unbn
         }, [])
-        return user;
-
-
+        return userObj;
     }
     const user = GetCurrentUser()
     const addCart = () => {
         console.log('Hello world')
     };
-   
-
-
-
     //state of the cart
     const [cartProducts, setCartProduct] = useState([])
-
     // getting cart product from the firestore collection and updating the state
     const cardProduct = []
     useEffect(() => {
@@ -69,183 +58,138 @@ export const Cart = () => {
         //     if(user){
         db.collection("cart").where('uid', '==', uid).onSnapshot(snapshort => {
             snapshort.forEach(newCart => {
-                console.log(newCart.data())
-                cardProduct.push(newCart.data())
+                console.log({ ...newCart.data(), ...{ id: newCart.id } })
+                cardProduct.push({ ...newCart.data(), ...{ id: newCart.id } })
             })
-
-         
             setCartProduct(cardProduct)
-
         })
-        //     }else{
-        //         console.log("user is not signed in to retive cart")
-        //     }
-        // })
+       
         console.log(cardProduct)
     }, [])
-
-
-
-
-    // const [products, setProducts] = useState([])
-
-    // const getProduct = async () => {
-    //     // const products = await db.collection('Product').get();
-    //     const products = await db.collection('cart').get();
-
-    //     // const productArray = [];
-    //     for (var snap of cardProduct.docs) {
-    //         var data = snap.data();
-    //         data.ID = snap.id;
-
-    //         cartProducts.push({
-    //             ...data
-    //         })
-    //         if (cartProducts.length === cartProducts.docs.length) {
-    //             setProducts(cartProducts)
-
-
-    //         }
-
-    //     }
-
-    // }
-    // console.log(cardProduct)
-    // const qty = cartProducts.map(cartProduct =>{
-    // return cartProduct.qty
-    // })
-    // const reduceOfQty =(accumulator, currntValue)=>accumulator+currntValue;
-    // // const totalQty =qty.reduce(reduceOfQty,0)
-    // const price = cartProducts.map((cartProduct)=>{
-    // return cartProduct.TotalProductPrice
-    // })
-    // const reduceOfPrice =(accumulator, currntValue)=>accumulator+ currntValue;
-    // const totalPrice = price.reduce(reduceOfPrice,0);
-    // let Product ;
-    // const cartProductIncrease=(cardProduct)=>{
-    //     Product = cardProduct;
-    //     Product.qty=Product.qty+1;
-    //     Product.TotalProductPrice = Product.qty*Product.price;
-    //     auth.onAuthStateChanged(user=>{
-    //         if(user){
-    //             db.collection('cart'+ user.uid).doc(cardProduct.ID).update(Product).then(()=>{
-    //                 console.log("Increment!!")
-    //             })
-    //         }else{
-    //             console.log("user is not logged in to increament")
-    //         }
-    //     })
-    // }
-    // const cartProductDecrease=(cardProduct)=>{
-    //     Product = cardProduct;
-    //     if(Product.qty>1)
-    //     Product.qty=Product.qty-1;
-    //     Product.TotalProductPrice = Product.qty*Product.price;
-    //     auth.onAuthStateChanged(user=>{
-    //         if(user){
-    //             db.collection('cart'+ user.uid).doc(cardProduct.ID).update(Product).then(()=>{
-    //                 console.log("Decrement!!")
-    //             })
-    //         }else{
-    //             console.log("user is not logged in to increament")
-    //         }
-    //     })
-    // }
-    //   return (
-    //     <>
-    //     <Navbar user={user}/>
-    //     {cardProduct.length>0 &&(
-    //         <div className='container-fluid'>
-    //         <h1 className='text-center'>Cart</h1>
-    //         <div className='products-box'>
-
-    //             {/* <CartProducts cardProduct={cardProduct}
-    //                 cartProductIncrease={cartProductIncrease}
-    //                 cartProductDecrease={cartProductDecrease}
-    //             /> */}
-    //         </div>
-
-    //         <div className='summery-box'>
-    //         <h5>Cart Summary</h5>
-    //         <br></br>
-    //         <div>
-    //             Total No of Product:<span>{totalQty}</span>
-    //         </div>
-    //         <div>
-    //             Total Price to Pay:<span>R{totalPrice}</span>
-    //         </div>
-    //         </div>
-    //         </div>
-    //     )
-    //     }
-
-    //     {cardProduct.length<1 &&(
-    //         <div className='container-fluid'>No Products to show</div>
-
-
-    //     )
-    //     }
-    //            {/* <Products products={products} helloWorld={helloWorld} /> */}
-    //     </>
-    //   )
-    let getPrice=[];
-    const checkOut =(overallAmount) => {
-        navigate('/paystack', {state:{total:overallAmount}});
+    const paywithpaystack = (e) => {
+        // e.preventDefault()
+        // console.log("current amount ", amount)
+        const paystack = new PaystackPop()
+        paystack.newTransaction({
+            key: "pk_test_145aacfe44042ba956a6f2039dda1dd7477f95a3",
+            amount: overallAmount * 100,
+            email: userObj.Email,
+            firstName: userObj.FullName,
+            lastName: userObj.FullName,
+            onSuccess(transaction) {
+                let message = `Payment Complete! Reference ${transaction.reference}`
+                alert(message);
+                db.collection('user').doc(uid).collection('completedOrders').doc(transaction.reference).set({
+                    prodList: cartProducts,
+                    referenceNumber: transaction.reference,
+                    createdAt: Timestamp,
+                }).then(() => {
+                });
+            },
+            onCancel() {
+                alert("Transaction Cancelled")
+            }
+        })
+        // alert("Successful payment")
     }
-    let i = 0;
+    let getPrice = [];
+    const checkOut = (overallAmount, prodList) => {
+        console.log('prodList: ', prodList);
+        navigate('/paystack', { state: { total: overallAmount, prodList: prodList } });
+    }
+    const handleDecrease = async (res) => {
+        const cartQtyRef = doc(db, "cart", res.id);
+        await updateDoc(cartQtyRef, {
+            qty: increment(-1),
+        }).then(() => {
+            db.collection("cart").doc(res.id).get().then(async (snapshort) => {
+                console.log('hello', snapshort.data())
+                await updateDoc(cartQtyRef, {
+                    total: parseFloat(snapshort.data().qty) * parseFloat(snapshort.data().price)
+                }).then(() => {
+                    console.log('Increment done!')
+                });
+            }).catch(er => {
+                console.log(er.message)
+            });
+        });
+    }
+    const handleIncrement = async (res) => {
+        const cartQtyRef = doc(db, "cart", res.id);
+        await updateDoc(cartQtyRef, {
+            qty: increment(1),
+        }).then(() => {
+            db.collection("cart").doc(res.id).get().then(async (snapshort) => {
+                console.log('hello', snapshort.data())
+                await updateDoc(cartQtyRef, {
+                    total: parseFloat(snapshort.data().qty) * parseFloat(snapshort.data().price)
+                }).then(() => {
+                    console.log('Increment done!')
+                });
+            }).catch(er => {
+                console.log(er.message)
+            });
+        });
+    }
+    const handleDelete = (res) => {
+        db.collection('cart').doc(res.id).delete().then(() => {
+            console.log("document deleted=>", res.id)
+        })
+    }
     let overallAmount = 0;
+    let quantity = 1;
     return (
         <>
-        <h1 style={{color:'grey', maginLeft:'2%', fontSize:'40px'}}>Cart</h1>
-        
-            <div>
-                {cartProducts.map((res,i,arr) => {
-                      getPrice.push(arr[i].price*res.qty);
-                      if (res.price)
-                      overallAmount = overallAmount + (parseFloat(res.price) * parseFloat(res.qty));
-                      console.log('chek', overallAmount)
-                //     const getTotalAmount=()=>{
-                //      let getAmount = res.price;
-                //      let getQty = res.qty;
-                //      let totalPrice = getAmount*getQty
-                //      console.log("this is the total ",totalPrice)
-                //      return {totalPrice};
-                          
-                        
-                        
-                //     }
-                //    console.log(getTotalAmount())
-
+        <div style={{background: 'whitesmoke', margin: 0, padding: '3%', justifyContent: 'center'}}>
+            <h1 style={{color: 'grey', fontSize: '50px', padding: '0 1%'}}>Cart</h1>
+            <Link to='/' style={{textDecoration: 'none', float: 'right', color: 'grey', marginTop: '-80px', marginRight: '1%'}}><h4>Back To Home</h4></Link>
+            <div style={{backgroundColor: 'white', padding: '2%', borderRadius: '30px'}}>
+                {cartProducts.map(res => {
+                    if (res.price) {
+                        overallAmount = overallAmount + (parseFloat(res.price) * parseFloat(res.qty));
+                        console.log('chek', overallAmount)
+                    }
+                    if (res.qty > 1) {
+                        quantity = (parseFloat(res.qty))
+                        console.log("Current Quantity here:", quantity)
+                    }
+                   
                     return (
-                        <div style={{background: 'whitesmoke', margin: 8, color:'grey', display: 'flex'}}>
-                           <div style={{padding:'2%'}}><img src={res.image} height={280} alt='product-image' /></div>
-                            <div style={{marginLeft: '10%',marginTop: '1%', fontSize: '20px', fontWeight: '500', borderLeft: '1px solid grey', paddingLeft: '2%', marginBottom: ' 1%' }}>
-                            <p>{res.brandCategory}</p>
-                            <p>{res.prodType}</p>
-                            <p>{res.prodName}</p>
-                            <p>{res.prodDiscription}</p>
-                            <p>R{res.price}</p>
-                            <p>{res.colour}</p>
-                            <p>{res.size}</p>
-                            <p>{res.productCode}</p>
+                        <div style={{ justifyContent: 'center', marginBottom: '1%', color: 'whitesmoke', display: 'flex', borderBottom: '1px solid grey' }}>
+                            <div style={{alignSelf: 'center', padding: '0 10px'}}><img src={res.image} height={200} alt='product-image' /></div>
+                            <div style={{color: 'grey', fontSize: '17px', fontWeight: '400', padding: '0 10%'}}>
+                                <p>Product Name: {res.prodName}</p>
+                                <p>Category: {res.brandCategory}</p>
+                                <p>Product Type: {res.prodType}</p>
+                                <p>Colour: {res.colour}</p>
+                                <p>Size: {res.size}</p>
+                                <p>Product code: {res.productCode}</p>
+                                <p>Unit Price: R{res.price}</p>
+                                <p>Product Total: R{res.price * res.qty}</p>
+                                
                             </div>
+                            <div style={{paddingLeft: '1%', display: 'flex', color: 'grey', fontWeight: '400', height: '50%', paddingTop: '2%'}}>
+                                <button><FaMinusCircle size={25} color={'grey'} onClick={(v) => handleDecrease(res)}/></button>
+                                <p style={{padding: '0 20px'}}>{res.qty}</p>
+                                <button><FaPlusCircle onClick={(v) => handleIncrement(res)} size={25} color={'grey'} /></button>
+                                <button style={{marginLeft: '10px'}}><RiDeleteBin5Line onClick={(v) => handleDelete(res)} size={30} color={'grey'} /></button>
+                            </div>
+                            
                         </div>
-                        
                     )
                 })}
+                <p style={{color: 'grey', fontSize: '22px', fontWeight: '400'}}>Customer Name: {userObj.FullName}</p>
+                <p style={{color: 'grey', fontSize: '22px', fontWeight: '400'}}>Cart Total : R {overallAmount}</p>
                 <button 
-                style={{border: '1px solid transparent', backgroundColor: ' grey', fontSize: '18px', justifyContent: 'center', padding: '1%', width: '20%', color: 'whitesmoke', fontWeight: '500', alignSelf: 'center', margin: '2%', cursor: 'pointer'}}
-c                onClick={() => checkOut(overallAmount)}>Checkout</button>
-
-                                {/* <Link to={{
-                    pathname: `/paystack`,
-                    state: {amount: 'amount'}
-                }} >Checkout </Link> */}
-                {/* <h4><Link to={`/paystack:${'hello'}`}>Checkout</Link></h4> */}
-
-                  {/* <h4><Link to={`/paystack`}>Checkout</Link></h4>   */}
+                onClick={() => paywithpaystack(overallAmount, cartProducts)}
+                style={{border: '1px solid transparent', backgroundColor: ' grey', fontSize: '18px', justifyContent: 'center', padding: '1%', width: '20%', color: 'whitesmoke', fontWeight: '500', alignSelf: 'center', margin: '2%', cursor: 'pointer'}}>
+                    Checkout
+                </button>
             </div>
-            {/* */}
+           </div>
         </>
     )
 }
+
+
+
