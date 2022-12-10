@@ -63,7 +63,7 @@ export const Signup = () => {
                 <Link to="/login" className='link-btn'><button className='link-btn'>Already have account Login?</button></Link>
                 
            </div>
-           <button type='submit' className='btn -btn-success btn-md'>Register</button>
+           <button type='submit' className='btn link-btn'>Register</button>
         </form>
         {errorMsg&& <>
             <div className='error-msg'>{errorMsg}</div>

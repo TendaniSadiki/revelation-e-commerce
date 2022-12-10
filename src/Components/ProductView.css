@@ -79,19 +79,16 @@
 .sizeblock p{
     font-size: 30px;
     display: flex;
-    
     background: yellow;
-     
-    
     border: 5px solid whitesmoke;
     border-radius: 30px;
     margin-top: 10px;
 }
-.sizeblock p:hover{
 
+.sizeblock p:hover{
    background-color: #ff6f69 ;
- 
 }
+
 .buttons{
     width: 100%;
     height: 15%;

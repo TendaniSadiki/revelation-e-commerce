@@ -87,7 +87,7 @@ function ProductVIew(individualProduct, ID, individualCartProduct) {
                        
 
                        
-                         
+                
                         <div  className='popupimage'>    
                            <img src={products.image} height={300} alt="productImage" />
                         </div>
