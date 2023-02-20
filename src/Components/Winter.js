@@ -86,30 +86,31 @@ const Winter = (props) => {
         console.log('Hello world')
     };
     return (
-        <>
-           <Box sx={{ flexGrow: 1 }}>
-           <Grid container spacing={{ xs: 2, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {Array.from(Array(3)).map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-                    {products.length > 0 && (
-                        <div className='container-fluid'>
-                            <div className='productBox' >
-                                <div>
-                                    <Products products={products} helloWorld={helloWorld} />
+        <> 
+           <Box sx={{ flexGrow: 1 }} marginLeft={4}>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 20 }} >
+                    {Array.from(Array(5)).map((_, index) => (
+                        <Grid item xs={4} sm={4} md={4} key={index} marginTop={2} >
+
+                            {products.length > 0 && (
+                                <div className='container-fluid'>
+                                    <div className='productBox' >
+                                        <div>
+                                            <Products products={products} helloWorld={helloWorld} />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    )}
-                    {products.length < 1 && (
-                        <div className='container-fluid'>
-                            <Box sx={{ display: 'flex' }}>
-                                <CircularProgress />
-                            </Box>
-                        </div>
-                    )}
+                            )}
+                            {products.length < 1 && (
+                                <div className='container-fluid'>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress />
+                                    </Box>
+                                </div>
+                            )}
+                        </Grid>
+                    ))}
                 </Grid>
-                ))}
-            </Grid>
             </Box>
         </>
     )

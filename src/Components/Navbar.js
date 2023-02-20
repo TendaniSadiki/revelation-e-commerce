@@ -41,6 +41,7 @@ export const Navbar = ({user}) => {
 <Link className ="navlink" to='/'>{user}</Link>
     <Link className ="navlink" to='/cart'><FaRegHeart size={20}/></Link>
     <Link className ="navlink" to='/cart'><FaShoppingCart size={20}/></Link>
+    <Link className="navlink" to='/order'>Order</Link>
     <Link className ="navlink"><GiExitDoor size={25}onClick={handleLogout} /></Link>
     {/* <span className='cart-indicator'>{totalQty}</span> */}
 

@@ -96,7 +96,7 @@ export const PayStack = (props) => {
                 setLastName("")
                 },
             onCancel(){
-                alert("Transaction Canceled")
+                alert("Transaction Cancelled")
             }
         })
         // alert("Successful payment")
